@@ -68,17 +68,17 @@ def load_user(user_id):
 def index():
     return render_template('login.html')
 
-# User Dashboard
-@app.route('/dashboard', methods=['GET', 'POST'])
+# Student Dashboard
+@app.route('/student_dashboard', methods=['GET', 'POST'])
 @login_required
-def dashboard():
+def student_dashboard():
     print('Rendering dashboard..')
 
     # get student from student dashboard
 
     student = Student.query.filter_by(s_userId=current_user.u_userId).first()
 
-    return render_template('dashboard.html', name=student.s_name)
+    return render_template('student_dashboard.html', name=student.s_name)
 
 # Login requests
 @app.route('/login', methods=['GET', 'POST'])
@@ -98,7 +98,7 @@ def login():
         else:
             login_user(user)
             print('User logged in!!')
-            return {"redirect": url_for('dashboard')}
+            return {"redirect": url_for('student_dashboard')}
 
     return {"redirect": url_for('index')}
 
