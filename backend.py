@@ -26,6 +26,14 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return self.u_password == password
 
+    def is_teacher(self):
+        teacher = Teacher.query.filter_by(t_userId=self.u_userId).first()
+
+        if teacher != None:
+            return True
+
+        return False
+
 class Teacher(db.Model):
     t_teacherId = db.Column(db.Integer, primary_key=True)
     t_userId = db.Column(db.Integer, unique=True, nullable=False)
@@ -95,7 +103,9 @@ def t_dashboard():
     # get student from student dashboard
     teacher = Teacher.query.filter_by(t_userId=current_user.u_userId).first()
 
-    return render_template('t_dashboard.html', name=teacher.t_name)
+    classesTaught = Class.query.filter_by(c_teacherId=teacher.t_teacherId).all()
+
+    return render_template('t_dashboard.html', name=teacher.t_name, classes=classesTaught)
 
 # Login requests
 @app.route('/login', methods=['GET', 'POST'])
@@ -133,7 +143,7 @@ def logout():
     logout_user()
     return {"redirect": url_for('index')}
 
-@app.route('/addClass/<classId>', methods=['GET', 'POST'])
+@app.route('/addClass/<int:classId>', methods=['GET', 'POST'])
 @login_required
 def addClass(classId):
     if request.method == 'POST':
@@ -158,7 +168,7 @@ def addClass(classId):
         
     return '200'
 
-@app.route('/removeClass/<classId>', methods=['GET', 'POST'])
+@app.route('/removeClass/<int:classId>', methods=['GET', 'POST'])
 @login_required
 def removeClass(classId):
     if request.method == 'POST':
@@ -177,6 +187,23 @@ def removeClass(classId):
 
     return '200'
 
+@app.route('/lookupClass/<int:classId>', methods=['GET', 'POST'])
+@login_required
+def lookupClass(classId):
+    if request.method == 'GET':
+
+        #check for credentials
+        if(current_user.is_teacher()):
+
+            teacher = Teacher.query.filter_by(t_userId=current_user.u_userId).first()
+
+            students = Enrollment.query.filter_by(e_classId=classId).all()
+
+            class_name = Class.query.filter_by(c_classId=classId).first().c_courseName
+
+            return render_template('t_grades.html', name=teacher.t_name, students=students, class_name=class_name, students=Student)
+
+    return '200'
 # Run app
 if __name__ == '__main__':
     app.run(debug=True)

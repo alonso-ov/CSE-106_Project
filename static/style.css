@@ -45,3 +45,12 @@ th {
     justify-content: space-between;
     border-style: dashed;
 }
+
+a{
+    color:blue;
+}
+
+.goBack{
+    display:flex;
+    justify-content: left;
+}

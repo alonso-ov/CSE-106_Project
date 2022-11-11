@@ -71,3 +71,7 @@ function removeClass(c_classId) {
             console.log('addClass request was unsuccessful')
         })
 }
+
+function goBackT_Dashboard(){
+    window.location.href = ('http://127.0.0.1:5000/t_dashboard')
+}

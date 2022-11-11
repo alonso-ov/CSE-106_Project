@@ -20,30 +20,26 @@
 
         <!-- Tab functionality -->
         <div class="tab">
-            <p class="tablinks">Your Courses</p>
+            <button class="goBack" onclick="goBackT_Dashboard()">Go Back</button>
+            <p>{{ class_name }}</p>
         </div>
 
-        <!-- Your Courses Tab -->
-        <div id="yourCourses" class="tabContent">
+        <!-- Edit Grade Tab -->
+        <div class="tabContent">
             <table>
                 <tr>
-                    <th> Course Name </th>
-                    <th> Teacher </th>
-                    <th> Time </th>
-                    <th> Student Enrolled </th>
+                    <th> Student Name </th>
+                    <th> Grade </th>
                 </tr>
 
-                {% block allClasses %}
-                        <!-- display all courses-->
-                        {% for class in classes %}
+                {% block grades %}
 
-                            <tr>
-                                <td> <a href="http://127.0.0.1:5000/lookupClass/{{class.c_classId }}">{{ class.c_courseName }}</a></td>
-                                <td> {{ name }}</td>
-                                <td> {{ class.c_time }}</td>
-                                <td> {{ class.c_enrollmentNum }} / {{ class.c_capacity }}</td>
-                            </tr>
-                        {% endfor %}
+                    {% for student in students %}
+                    <tr>
+                        <td>{{Student.query.filter_by(s_studentId=student.e_studentId).first().s_name}}</td>
+                        <td>{{student.e_grade}}</td>
+                    </tr>
+                    {% endfor%}
 
                 {% endblock %}
             </table>
