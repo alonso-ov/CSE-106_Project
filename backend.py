@@ -201,7 +201,7 @@ def lookupClass(classId):
 
             class_name = Class.query.filter_by(c_classId=classId).first().c_courseName
 
-            return render_template('t_grades.html', name=teacher.t_name, students=students, class_name=class_name, students=Student)
+            return render_template('t_grades.html', name=teacher.t_name, students=students, class_name=class_name, Student=Student)
 
     return '200'
 # Run app
