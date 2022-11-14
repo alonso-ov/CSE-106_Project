@@ -1,23 +1,134 @@
+.bg{ 
+    background: rgb(69,123,157);
+    background: linear-gradient(90deg, rgba(69,123,157,1) 4%, rgba(168,218,220,1) 97%);
+    font-family: 'Roboto Condensed';
+}
+
 .card-holder{
-    width: 50%;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
     padding: 10px;  
     border-radius: 15px;
-    border-style: dashed;
-    text-align:center;
+    border-style: groove;
+    background: rgba( 241, 250, 238, 0.35 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1.5px );
+    -webkit-backdrop-filter: blur( 1.5px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.welcome{
+    font-size: 50px;
+    float: inline-start;
+    margin-left: 40%;
 
 }
-
 .card {
     text-align: center;
 }
+/* the title above the input boxes*/
+.TitleCard {
+    color: black;
+}
+.input {
+    color: #000000;
+    border: 2px solid #1D3557;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background: transparent;
+    max-width: 190px;
+   }
+   
+   .input:active {
+    box-shadow: 2px 2px 15px #F1FAEE inset;
+   }
+
+.login {
+        min-width: 130px;
+        height: 40px;
+        color: #fff;
+        padding: 5px 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        outline: none;
+        border-radius: 20px;
+        border: 2px solid #1D3557;
+        background: #1D3557;
+      }
+      .login:hover {
+        background: #fff;
+        color: #457B9D
+      }
+
+    .logout{
+        min-width: 130px;
+        height: 40px;
+        color: #fff;
+        padding: 5px 10px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        outline: none;
+        border-radius: 20px;
+        border: 2px solid #1D3557;
+        background: #1D3557;
+      }
+      .logout:hover {
+        background: #fff;
+        color: #457B9D
+      }
+
+.tablinks {
+        appearance: none;
+        background-color: transparent;
+        border: 0.125em solid #1A1A1A;
+        border-radius: 20px;
+        box-sizing: border-box;
+        color: #3B3B3B;
+        display: inline-block;
+        line-height: normal;
+        margin: 0;
+        min-height: 5px;
+        min-width: o;
+        outline: none;
+        padding: 5px;
+        text-align: center;
+        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        will-change: transform;
+       }
+       
+       .tablinks:disabled {
+        pointer-events: none;
+       }
+       
+       .tablinks:hover {
+        color: #F1FAEE;
+        background-color: #A8DADC;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+        transform: translateY(-2px);
+       }
+       
+       .tablinks:active {
+        box-shadow: none;
+        transform: translateY(1);
+       }
 
 .flash-holder{
     width: 25%;
     margin-left: auto;
     margin-right: auto;
+    
+
 }
 .flashes {
     text-align: center;
@@ -39,9 +150,32 @@ th {
     text-align: center;
     width:25%;
 }
+/*add course button*/
+.addCB{
+    color: #090909;
+    padding: 10px 10px;
+    border-radius: 0.5em;
+    background: #26c578;
+   }
+   .subCB{
+    color: #090909;
+    padding: 10px 10px;
+    border-radius: 0.5em;
+    background: #E63946;
+   }
+
 
 .header {
     display:flex;
     justify-content: space-between;
-    border-style: dashed;
+    border-style: gro;
 }
+
+/* when changing the size of the window*/
+@media only screen and (max-width: 320px) {
+
+    body { 
+       font-size: 2em; 
+    }
+ 
+ }
