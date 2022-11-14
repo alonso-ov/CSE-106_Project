@@ -8,14 +8,15 @@ $(".grade").each((_, el) => {
     })
 })
 
-function updateGrades() {
+function updateGrades(classId) {
 
     $(".changed").each((e, el) => {
         console.log("Name: ", $(el).attr('id'))
         console.log("Grade: ", $(el).val())
 
         const updateGrade = {
-            userId: $(el).attr('id'),
+            studentId: $(el).attr('id'),
+            classId: classId,
             newGrade:$(el).val()
         }
 
@@ -30,7 +31,7 @@ function updateGrades() {
                 console.log('successful')
             })
             .catch((response) => {
-                console.log('update for ' + updateGrade['userId'] + ' was unsuccessfull')
+                console.log('update for ' + updateGrade['studentId'] + ' was unsuccessfull')
             })
 
         console.log(updateGrade)

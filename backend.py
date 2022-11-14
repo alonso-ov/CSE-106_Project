@@ -202,7 +202,7 @@ def lookupClass(classId):
 
             class_name = Class.query.filter_by(c_classId=classId).first().c_courseName
 
-            return render_template('t_grades.html', name=teacher.t_name, students=students, class_name=class_name, Student=Student)
+            return render_template('t_grades.html', name=teacher.t_name, students=students, class_name=class_name, Student=Student, classId=classId)
 
     return '200'
 
@@ -213,8 +213,11 @@ def updateGrade():
     
     if request.method == 'PUT':
 
-        print('userId:      ', request.json['userId'])
-        print('new Grade: ', request.json['newGrade'])
+        enrollment = Enrollment.query.filter_by(e_classId=request.json['classId'], e_studentId=request.json['studentId']).first()
+
+        enrollment.e_grade = request.json['newGrade']
+
+        db.session.commit()
 
     return '400'
 
