@@ -8,19 +8,19 @@
         <link rel="stylesheet" href="../static/style.css">
         <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     </head>
-    <body>
+    <body class="bg">
 
    
     <div class="card-holder">
         <h4>University</h4>
         <div class="header">
             <p>Welcome Dr. {{ name }}!</p>
-            <input type="button" onclick="logout()" value="Sign Out">
+            <input class="logout" type="button" onclick="logout()" value="Sign Out">
         </div>
 
         <!-- Tab functionality -->
         <div class="tab">
-            <button class="goBack" onclick="goBackT_Dashboard()">Go Back</button>
+            <button class="tablinks" class="goBack" onclick="goBackT_Dashboard()">Go Back</button>
             <p>{{ class_name }}</p>
         </div>
 
@@ -43,7 +43,7 @@
 
                 {% endblock %}
             </table>
-            <input type="button" value="Update" onclick="updateGrades('{{ classId }}')">
+            <input class="tablinks" type="button" value="Update" onclick="updateGrades('{{ classId }}')">
         </div>
 
 
