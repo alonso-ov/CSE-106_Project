@@ -73,11 +73,12 @@
 
                                 <!-- If the student is not enrolled in class then show option to add-->
                                 {% if class.c_classId not in classesIn %}
-                                <td><input class = "addCB" type="button" value="+" onclick="addClass( '{{ class.c_classId }}' )"></td>
+
+                                  <td><input class = "addCB" type="button" value="+" onclick="addClass( '{{ class.c_classId }}' )"></td>
 
                                 <!-- Else show option to remove-->
                                 {% else  %}
-                                <td><input class = "subCB"  type="button" value="-" onclick="removeClass('{{ class.c_classId }}')"></td>
+                                  <td><input class = "subCB"  type="button" value="-" onclick="removeClass('{{ class.c_classId }}')"></td>
                                 {% endif %}
                             </tr>
                         {% endfor %}

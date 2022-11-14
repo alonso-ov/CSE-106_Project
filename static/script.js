@@ -65,9 +65,10 @@ function addClass(c_classId) {
 
 function removeClass(c_classId) {
     fetch(`http://127.0.0.1:5000/removeClass/${c_classId}`, {
-            method: 'POST',
+            method: 'DELETE',
         })
         .catch((response) => {
             console.log('addClass request was unsuccessful')
         })
 }
+

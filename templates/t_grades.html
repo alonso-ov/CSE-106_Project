@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Student Dashboard</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    </head>
+    <body>
+
+   
+    <div class="card-holder">
+        <h4>University</h4>
+        <div class="header">
+            <p>Welcome Dr. {{ name }}!</p>
+            <input type="button" onclick="logout()" value="Sign Out">
+        </div>
+
+        <!-- Tab functionality -->
+        <div class="tab">
+            <button class="goBack" onclick="goBackT_Dashboard()">Go Back</button>
+            <p>{{ class_name }}</p>
+        </div>
+
+        <!-- Edit Grade Tab -->
+        <div class="tabContent">
+            <table>
+                <tr>
+                    <th> Student Name </th>
+                    <th> Grade </th>
+                </tr>
+
+                {% block grades %}
+
+                    {% for student in students %}
+                    <tr>
+                        <td>{{Student.query.filter_by(s_studentId=student.e_studentId).first().s_name}}</td>
+                        <td><input class="grade" id="{{Student.query.filter_by(s_studentId=student.e_studentId).first().s_studentId}}" type="number" value="{{student.e_grade}}" autocomplete=off></td>
+                    </tr>
+                    {% endfor%}
+
+                {% endblock %}
+            </table>
+            <input type="button" value="Update" onclick="updateGrades('{{ classId }}')">
+        </div>
+
+
+    </body>
+    <script src="../static/script.js"></script>
+    <script src="../static/t_dashboard.js"></script>
+    <!--<script src="{{ url_for('static',filename='script.js') }}" async defer></script>-->
+</html>

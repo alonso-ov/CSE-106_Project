@@ -27,24 +27,26 @@
         <!-- Your Courses Tab -->
         <div id="yourCourses" class="tabContent">
             <table>
-                <thead>
-                    <tr>
-                        <th> Course Name </th>
-                        <th> Teacher </th>
-                        <th> Time </th>
-                        <th> Student Enrolled </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in classes %}
-                    <tr>
-                        <td><a href = "{{url_for('class_roster')}}">{{i.c_courseName}}</a></td>
-                        <td>{{name}}</td>
-                        <td>{{i.c_time}}</td>
-                        <td>{{i.c_enrollmentNum}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
+                <tr>
+                    <th> Course Name </th>
+                    <th> Teacher </th>
+                    <th> Time </th>
+                    <th> Student Enrolled </th>
+                </tr>
+
+                {% block allClasses %}
+                        <!-- display all courses-->
+                        {% for class in classes %}
+
+                            <tr>
+                                <td> <a href="http://127.0.0.1:5000/lookupClass/{{class.c_classId }}">{{ class.c_courseName }}</a></td>
+                                <td> {{ name }}</td>
+                                <td> {{ class.c_time }}</td>
+                                <td> {{ class.c_enrollmentNum }} / {{ class.c_capacity }}</td>
+                            </tr>
+                        {% endfor %}
+
+                {% endblock %}
             </table>
         </div>
 
