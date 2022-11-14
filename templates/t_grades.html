@@ -37,16 +37,18 @@
                     {% for student in students %}
                     <tr>
                         <td>{{Student.query.filter_by(s_studentId=student.e_studentId).first().s_name}}</td>
-                        <td>{{student.e_grade}}</td>
+                        <td><input class="grade" id="{{Student.query.filter_by(s_studentId=student.e_studentId).first().s_studentId}}" type="number" value="{{student.e_grade}}" autocomplete=off></td>
                     </tr>
                     {% endfor%}
 
                 {% endblock %}
             </table>
+            <input type="button" value="Update" onclick="updateGrades()">
         </div>
 
 
     </body>
     <script src="../static/script.js"></script>
+    <script src="../static/t_dashboard.js"></script>
     <!--<script src="{{ url_for('static',filename='script.js') }}" async defer></script>-->
 </html>

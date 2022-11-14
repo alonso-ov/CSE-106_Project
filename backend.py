@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, request, abort, render_template, fla
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_manager, LoginManager, login_required, login_user, logout_user, current_user
 from flask_cors import CORS
+from random import randint
 
 app = Flask(__name__)
 
@@ -158,7 +159,7 @@ def addClass(classId):
 
             #create enrollment for student
             allEnrollment = Enrollment.query.all()
-            e_id = len(allEnrollment) + 1
+            e_id = randint(0, 100_000)
             newEnrollment = Enrollment(e_id=e_id, e_classId=classId, e_studentId=student.s_studentId, e_grade=100.0)
             db.session.add(newEnrollment)
 
@@ -168,19 +169,19 @@ def addClass(classId):
         
     return '200'
 
-@app.route('/removeClass/<int:classId>', methods=['GET', 'POST'])
+@app.route('/removeClass/<int:classId>', methods=['GET', 'DELETE'])
 @login_required
 def removeClass(classId):
-    if request.method == 'POST':
+    if request.method == 'DELETE':
 
         course = Class.query.filter_by(c_classId=classId).first()
 
         student = Student.query.filter_by(s_userId=current_user.u_userId).first()
         
-        enrollment = Enrollment.query.filter_by(e_studentId=student.s_studentId).first()
+        enrollment = Enrollment.query.filter_by(e_classId=classId, e_studentId=student.s_studentId).first()
 
         # check if student is enrolled in class
-        if (enrollment != None):
+        if (enrollment != None and course.c_enrollmentNum != 0):
             db.session.delete(enrollment)
             course.c_enrollmentNum -= 1
             db.session.commit()
@@ -204,6 +205,19 @@ def lookupClass(classId):
             return render_template('t_grades.html', name=teacher.t_name, students=students, class_name=class_name, Student=Student)
 
     return '200'
+
+@app.route('/updateGrade', methods=['PUT'])
+@login_required
+def updateGrade():
+    print('updating...')
+    
+    if request.method == 'PUT':
+
+        print('userId:      ', request.json['userId'])
+        print('new Grade: ', request.json['newGrade'])
+
+    return '400'
+
 # Run app
 if __name__ == '__main__':
     app.run(debug=True)
